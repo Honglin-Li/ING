@@ -83,7 +83,7 @@ def partner_finance():
         partner.childcare_hours = form.childcare_hours.data
 
         # calculate
-        results = CalculationService().calculate_individually(current_user, partner)
+        results = CalculationService().calculate_current_state(current_user, partner)
 
         return render_template('calculation_results.html', results=results)
 

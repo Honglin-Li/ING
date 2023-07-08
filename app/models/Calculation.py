@@ -20,7 +20,7 @@ class CalculationService():
 
         return user_total, user_expense, user_unpaid
 
-    def calculate_individually(self, owner, partner):
+    def calculate_current_state(self, owner, partner):
         # calculate for estimated partner spending
         owner_total, owner_expense, owner_unpaid = self.calculate_expense(owner)
 
