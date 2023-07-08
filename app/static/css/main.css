@@ -1,0 +1,22 @@
+.navbar {
+    background-color: #FF6200;
+}
+
+.navbar a:hover {
+    background-color: #fff;
+    color: #FF6200;
+}
+
+.footer {
+    color: #FF6200;
+}
+
+.navbar a {
+    color: #fff;
+}
+
+
+.margin {
+    margin-bottom: 40px;
+    margin-top: 20px;
+}

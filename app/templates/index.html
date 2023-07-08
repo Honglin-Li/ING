@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <div class="row">
+        <h1>Welcome!
+            {%  if current_user.is_authenticated %}
+                {{ current_user.username }}
+            {% endif %}
+        </h1>
+    </div>
+{% endblock %}

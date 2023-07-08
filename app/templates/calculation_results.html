@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Calculation Results {% endblock %}
+
+{% block page_content %}
+<h1>Finance distribution between you and your partner</h1>
+<p>some bla bla here...</p>
+
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Finance Items</th>
+          <th>Me</th>
+          <th>My Partner</th>
+          <th>Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total</td>
+          <td>{{ results['owner_total'] }}</td>
+          <td>{{ results['owner_expense'] }}</td>
+          <td>{{ results['owner_unpaid'] }}</td>
+        </tr>
+        <tr>
+          <td>Expenses</td>
+          <td>{{ results['partner_total'] }}</td>
+          <td>{{ results['partner_expense'] }}</td>
+          <td>{{ results['partner_unpaid'] }}</td>
+        </tr>
+        <tr>
+          <td>Unpaid work</td>
+          <td>{{ results['diff_total'] }}</td>
+          <td>{{ results['diff_expense'] }}</td>
+          <td>{{ results['diff_unpaid'] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
