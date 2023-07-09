@@ -55,13 +55,9 @@ def register():
     form = RegisterFrom()
 
     if request.method == 'POST' and form.validate_on_submit():
-        username = form.username.data
         email = form.email.data
 
         # check identity of email & username
-        if User.query.filter_by(username=username).first():
-            flash('The Username is registered, please change a new Username.')
-            return redirect(url_for('auth.register'))
 
         if User.query.filter_by(email=email).first():
             flash('The Email is registered, please change a new Email Address.')
@@ -69,12 +65,10 @@ def register():
 
         # register
         user = User(
-            username=username,
             email=email,
             password=form.password.data,
             firstname = form.firstname.data,
             lastname = form.lastname.data,
-            birthday = form.birthday.data,
             is_married = form.is_married.data,
             share = form.share.data
         )

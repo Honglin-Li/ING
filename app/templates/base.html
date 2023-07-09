@@ -10,6 +10,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
       href="{{url_for('static', filename='css/main.css')}}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='images/ING.png')}}">
@@ -18,58 +19,54 @@
 
 {% block navbar %}
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-sm navbar-fixed-top">
+<nav class="navbar navbar-expand-sm fixed-top">
   <!-- Brand -->
   <a class="navbar-brand" href="{{ url_for('index') }}">
     <img src="{{url_for('static', filename='images/ing_white.png')}}" width="30" height="30"/>
     FairShare
   </a>
 
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('calculation.my_finance') }}">My Finance State</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link2</a>
-      </li>
     </ul>
-  </div>
+
+    {% if current_user.is_authenticated %}
+      <span class="navbar-text navbar-right">
+        Hello, {{ current_user.firstname }}
+      </span>
+     {% endif %}
 
    <!-- Login -->
+  {% if not current_user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ url_for('auth.register') }}">
-        <span class="glyphicon glyphicon-user"></span>
+      <li><a href="{{ url_for('auth.register') }}" class="small-right-margin">
+        <span class="fa fa-user"></span>
         Register
       </a></li>
       <li><a href="{{ url_for('auth.login') }}">
-        <span class="glyphicon glyphicon-log-in"></span>
+        <span class="fa fa-id-card"></span>
         Login
       </a></li>
     </ul>
+  {% endif %}
 </nav>
 
 
 <div class="placeholder"> </div>
 {% endblock %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+
 
 {% block content %}
-<div class="container margin">
+<div class="container margin" style="margin-top:80px">
+
+  {% for message in get_flashed_messages() %}
+        <div class='alert alert-success'>{{ message }}</div>
+  {% endfor %}
+
   {% block page_content %}
 
   {% endblock %}
@@ -78,7 +75,7 @@
 <!-- Footer -->
 <footer class="p-4 border-top margin">
   <div class="container  align-items-center text-center">
-    <p class="text-muted"> &copy; 2023 Team 1 all rights reserved. </p>
+    <p class="text-muted"> &copy; 2023 Team 1 FLYMZIS all rights reserved. </p>
   </div>
 </footer>
 {% endblock %}

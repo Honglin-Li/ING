@@ -3,6 +3,11 @@
 
 {% block page_content %}
     <div class="row">
-        {{ wtf.quick_form(form) }}
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+        {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
+
+            <p class="margin text-center">You can register or log in with Test Account. Email:test@test.com Password: test</p>
+        </div>
     </div>
 {% endblock %}

@@ -11,7 +11,6 @@ class LoginForm(FlaskForm):
 
 
 class RegisterFrom(FlaskForm):
-    username = StringField('Username:', validators=[DataRequired(), Length(1, 64)])
     email = EmailField('Email:', validators=[DataRequired()])
     password = PasswordField('Password:', validators=[DataRequired()])
     confirmPassword = PasswordField('Confirm Password:', validators=[DataRequired(), EqualTo('password')])
@@ -19,7 +18,6 @@ class RegisterFrom(FlaskForm):
     # personal info
     firstname = StringField('Firstname:', validators=[Length(1, 64)])
     lastname = StringField('Lastname:', validators=[Length(1, 64)])
-    birthday = DateField('Birthday:')
     is_married = BooleanField('Are you married?')
     share = BooleanField('Share finance state with your partner?')
 

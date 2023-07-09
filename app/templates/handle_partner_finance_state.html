@@ -2,13 +2,30 @@
 {% block title %} Fill out your Income & Expense per Month {% endblock %}
 
 {% block page_content %}
-<h1>Fill out your Partner's Income & Expense per Month</h1>
-<p>some instructions here...put invite & connect options here</p>
 
 <div class="row">
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
-    {{ wtf.quick_form(form) }}
+    <h1 class="margin">Partner's Finance State</h1>
+    <p>
+      <!--invite or connect or add yourself-->
+      (1) If your partner does not have an account yet, you can
+      <a href="#">invite</a>
+      your partner to sign up.
+      (2) If your partner already has an account, you can
+      <a href="#">connect</a>
+      with your partner to share financials.
+      (3) You can also use the table below to calculate your FAIR SHARE situation
+      by <span class="font-weight-bold">filling in your partner's financials</span></p>
+
+
+    {% if not current_user.partner_id %}
+
+      {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
+
+    {% else %}
+
+    {% endif %}
   </div>
 </div>
 

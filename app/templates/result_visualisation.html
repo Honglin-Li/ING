@@ -1,0 +1,191 @@
+<head>
+  <title>Bootstrap Card</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+{% extends "base.html" %}
+{% block title %} Calculation Results and Visualisation {% endblock %}
+
+{% block page_content %}
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center margin unfair"><i class="fa fa-thumbs-down"></i>Unfair</h2>
+
+
+    <!-- Put pie chart for Unfair here -->
+    {{ results['user_unfair'].user_expense }}
+    {{ results['user_unfair'].user_unpaid }}
+    {{ results['user_unfair'].partner_expense }}
+    {{ results['user_unfair'].partner_unpaid }}
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img src="{{url_for('static', filename='images/woman.png')}}" width="150" height="150">
+            <p class="name">{{ current_user.firstname }}</p>
+          </div>
+
+          <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Contribution = Total Expenses / Income
+            <span class="badge badge-danger badge-pill">
+              {{ results['user_unfair'].contribution_show }}</span>
+          </li>
+          <li class="list-group-item">
+            Care work expenses (Unpaid work)
+            <span class="badge badge-success badge-pill">{{ results['user_unfair'].house_care_cost }}</span>
+          </li>
+          <li class="list-group-item">
+            Living expenses
+            <span class="badge badge-success badge-pill">{{ results['user_unfair'].expenses_contribution }}</span>
+          </li>
+          <li class="list-group-item">
+            Balance
+            <span class="badge badge-success badge-pill">{{ results['user_unfair'].remain }}</span>
+          </li>
+        </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img src="{{url_for('static', filename='images/man.png')}}" width="150" height="150">
+            <p class="name">Liar</p>
+          </div>
+
+          <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Contribution
+            <span class="badge badge-danger badge-pill">{{ results['partner_unfair'].contribution_show }}</span>
+          </li>
+          <li class="list-group-item">
+            Care work expenses
+            <span class="badge badge-success badge-pill">{{ results['partner_unfair'].house_care_cost }}</span>
+          </li>
+          <li class="list-group-item">
+            Living expenses
+            <span class="badge badge-success badge-pill">{{ results['partner_unfair'].expenses_contribution }}</span>
+          </li>
+          <li class="list-group-item">
+            Balance
+            <span class="badge badge-success badge-pill">{{ results['partner_unfair'].remain }}</span>
+          </li>
+        </ul>
+          </div>
+      </div>
+    </div>
+</div>
+</div>
+
+
+  <div class="col-md-6">
+    <h2 class="text-center margin"><i class="fa fa-thumbs-up"></i>Fair</h2>
+
+
+    <!-- Put pie chart for Fair here -->
+
+
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-house-user"></i>Fairness Scale
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            a: Joint Care work expenses & Living expenses
+            <span class="badge badge-success badge-pill">{{ results['user_fair'].total_expense  | round(2) }}</span>
+          </li>
+          <li class="list-group-item">
+            b: Joint Income
+            <span class="badge badge-success badge-pill">{{ results['user_fair'].joint_salary  | round(2) }}</span>
+          </li>
+          <li class="list-group-item">
+            Fairness scale &#945; = a/b
+            <span class="badge badge-success badge-pill">{{ results['user_fair'].alpha  | round(2) }}</span>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img src="{{url_for('static', filename='images/woman.png')}}" width="150" height="150">
+            <p class="name">{{ current_user.firstname }}</p>
+          </div>
+
+          <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Contribution
+            <span class="badge badge-danger badge-pill">{{ results['user_fair'].contribution_show }}</span>
+          </li>
+          <li class="list-group-item">
+            &#945; * Salary
+            <span class="badge badge-success badge-pill">{{ results['user_fair'].fair_contribution  | round(2) }}</span>
+          </li>
+          <li class="list-group-item">
+            Balance
+            <span class="badge badge-success badge-pill">{{ results['user_fair'].remain  | round(2) }}</span>
+          </li>
+        </ul>
+          </div>
+          </div>
+    </div>
+</div>
+
+    <div class="card">
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <img src="{{url_for('static', filename='images/man.png')}}" width="150" height="150">
+            <p class="name">Liar</p>
+          </div>
+
+          <div class="col-md-8">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Contribution
+            <span class="badge badge-danger badge-pill">{{ results['partner_fair'].contribution_show }}</span>
+          </li>
+          <li class="list-group-item">
+            &#945; * Salary
+            <span class="badge badge-success badge-pill">{{ results['partner_fair'].fair_contribution  | round(2) }}</span>
+          </li>
+          <li class="list-group-item">
+            Balance
+            <span class="badge badge-success badge-pill">{{ results['partner_fair'].remain  | round(2) }}</span>
+          </li>
+        </ul>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

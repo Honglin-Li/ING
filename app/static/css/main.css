@@ -1,6 +1,11 @@
+body {
+    color: #818589;
+}
 .navbar {
     background-color: #FF6200;
+    font-weight: bold;
 }
+
 
 .navbar a:hover {
     background-color: #fff;
@@ -11,12 +16,36 @@
     color: #FF6200;
 }
 
-.navbar a {
+.navbar a, .navbar-text {
     color: #fff;
+    font-size: 18px;
 }
 
+.navbar-text{
+    margin-left: 20px;
+}
+
+.name {
+    font-size: 20px;
+}
+
+.unfair {
+    color: #18A558;
+}
 
 .margin {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     margin-top: 20px;
+}
+
+.small-right-margin {
+    margin-right: 10px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+h2, .name {
+    color: #FF6200;
 }

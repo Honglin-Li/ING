@@ -16,7 +16,6 @@ class User(db.Model, UserMixin):
 
     # columns of auth
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow())
@@ -26,7 +25,6 @@ class User(db.Model, UserMixin):
     # personal information
     firstname = db.Column(db.String(64))
     lastname = db.Column(db.String(64))
-    birthday = db.Column(db.Date)
     is_married = db.Column(db.Boolean, default=False)
 
     # partner & share
@@ -35,26 +33,31 @@ class User(db.Model, UserMixin):
     share = db.Column(db.Boolean, default=False)
 
     # finance info
-    # assume one person only has one fee form, so put fee in user table
-    #fee_details = db.relationship('Fee', backref='owner', uselist=False)
     # income
     salary = db.Column(db.Integer, default=0) # consider tax
-    external_income = db.Column(db.Integer, default=0)
+    salary_per_hour = db.Column(db.Integer, default=0)
+
+    # career life balance
+    goal = db.Column(db.Boolean, default=0) # 0 for priorize mone, 1 for life
+    working_hours_a_day = db.Column(db.Integer, default=0)
+    life_hours_a_day = db.Column(db.Integer, default=0)
+    care_hours_a_day = db.Column(db.Integer, default=0)
+
+    @property
+    def job_composition(self):
+        return self.working_hours_a_day * 5 / 40
 
     # expense
-    rent = db.Column(db.Integer, default=0)
-    load = db.Column(db.Integer, default=0)
-    travel = db.Column(db.Integer, default=0)
-    insurance = db.Column(db.Integer, default=0)
-    education = db.Column(db.Integer, default=0)
-    personal_care = db.Column(db.Integer, default=0)
+    expenses_contribution = db.Column(db.Integer, default=0)
+
+    house_care_hours_per_day = db.Column(db.Integer, default=0)
+
+    @property
+    def house_care_hours(self):
+        return self.house_care_hours_per_day * 30
 
     # by hour
-    childcare = db.Column(db.Integer, default=0)
-    household = db.Column(db.Integer, default=0)
-
-    childcare_hours = db.Column(db.Integer, default=0)
-    household_hours = db.Column(db.Integer, default=0)
+    outsource_house_care_hours = db.Column(db.Integer, default=0)
 
     # handle hashed password
     @property
@@ -71,6 +74,8 @@ class User(db.Model, UserMixin):
     # partner connection
     def connect(self, partner):
         self.partner = partner
+
+
 
 
 

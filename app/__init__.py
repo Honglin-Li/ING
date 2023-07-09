@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from app.config import config
 from .extensions import moment, lm, bootstrap, db
 from app.models.User import User
+
 
 
 def create_app(config_name):
@@ -32,7 +33,8 @@ def create_app(config_name):
     # index:main page
     @app.route('/')
     def index():
-        return render_template('index.html')
+        #return render_template('index.html')
+        return redirect(url_for('calculation.my_finance'))
 
 
     # errorhandler
